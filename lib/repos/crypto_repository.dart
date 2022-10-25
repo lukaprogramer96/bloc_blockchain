@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 
 import '../models/coin_model.dart';
 import '../models/crypto_model.dart';
+import '../models/twitter_model.dart';
 
 class CryptoRepository {
   String endpoint = 'https://api.coinpaprika.com/v1/coins';
@@ -26,6 +27,17 @@ class CryptoRepository {
         return null;
       }
       return CoinModel.fromJson(result);
+    } else {
+      throw Exception(response.reasonPhrase);
+    }
+  }
+
+  Future<List<TwitterModel>> getTwitterByCoinId(coinId) async {
+    String endpoint = 'https://api.coinpaprika.com/v1/coins/$coinId/twitter';
+    Response response = await get(Uri.parse(endpoint));
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      final List result = jsonDecode(response.body);
+      return result.map(((e) => TwitterModel.fromJson(e))).toList();
     } else {
       throw Exception(response.reasonPhrase);
     }

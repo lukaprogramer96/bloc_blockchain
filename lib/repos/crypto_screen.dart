@@ -1,5 +1,5 @@
-import 'package:bloc_reso_coder/repos/coin_screen.dart';
 import 'package:bloc_reso_coder/repos/crypto_repository.dart';
+import 'package:bloc_reso_coder/repos/options_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,11 +43,17 @@ class CryptoScreen extends StatelessWidget {
                   child: ListTile(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CoinScreen(
-                                    coinId: cryptoList[index].id,
-                                  )));
+                        context,
+                        // MaterialPageRoute(
+                        //   builder: (context) => CoinScreen(
+                        //     coinId: cryptoList[index].id,
+                        //   ),
+                        // ),
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              OptionsScreen(coinId: cryptoList[index].id),
+                        ),
+                      );
                     },
                     title: Text(
                       cryptoList[index].id.toString(),
@@ -57,9 +63,9 @@ class CryptoScreen extends StatelessWidget {
                       cryptoList[index].name.toString(),
                       style: const TextStyle(color: Colors.white70),
                     ),
-                    trailing: CircleAvatar(
-                      backgroundImage: NetworkImage(cryptoList[index].symbol),
-                    ),
+                    // trailing: CircleAvatar(
+                    //   backgroundImage: NetworkImage(cryptoList[index].symbol),
+                    // ),
                   ),
                 );
               },
