@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'tags_model.dart';
+import '../tags_model/tags_model.dart';
 
 part 'coin_model.g.dart';
 

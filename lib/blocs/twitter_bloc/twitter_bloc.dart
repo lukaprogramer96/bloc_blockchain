@@ -3,7 +3,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../models/twitter_model.dart';
+import '../../models/twitter_model/twitter_model.dart';
 import '../../repos/crypto_repository.dart';
 
 part 'twitter_event.dart';

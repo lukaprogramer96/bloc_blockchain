@@ -12,3 +12,7 @@ class LoadOptionsEvent extends OptionsEvent {}
 class OptionsDetailsEvent extends OptionsEvent {
   const OptionsDetailsEvent();
 }
+
+class TwitterEvent extends OptionsEvent {
+  const TwitterEvent();
+}

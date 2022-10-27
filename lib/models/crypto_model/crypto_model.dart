@@ -10,8 +10,10 @@ class CryptoModel {
   final String name;
   final String symbol;
   final int rank;
-  final bool is_new; //@JsonKey(name: 'first_name')
-  final bool is_active; //@JsonKey(name: 'first_name')
+  @JsonKey(name: 'is_new')
+  final bool? isnew; //@JsonKey(name: 'first_name')
+  @JsonKey(name: 'is_active')
+  final bool? isactive; //@JsonKey(name: 'first_name')
   final String type;
 
   CryptoModel({
@@ -19,8 +21,8 @@ class CryptoModel {
     required this.name,
     required this.symbol,
     required this.rank,
-    required this.is_new,
-    required this.is_active,
+    required this.isnew,
+    required this.isactive,
     required this.type,
   });
 

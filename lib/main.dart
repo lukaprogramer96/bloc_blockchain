@@ -1,11 +1,12 @@
 import 'package:bloc_reso_coder/blocs/app_states_bloc/app_states_bloc.dart';
 import 'package:bloc_reso_coder/repos/crypto_repository.dart';
-import 'package:bloc_reso_coder/repos/crypto_screen.dart';
-import 'package:bloc_reso_coder/repos/repositories.dart';
+import 'package:bloc_reso_coder/screens/exchanges_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'models/user_model.dart';
+import 'models/user_model/user_model.dart';
+import 'screens/crypto_screen.dart';
+import 'screens/tabview_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,11 +24,13 @@ class MyApp extends StatelessWidget {
                 CryptoRepository(), //napraviti da mogu da pozovem vise repo-a (UserRepository)
           ),
           RepositoryProvider(
-            create: (context) => UserRepository(),
+            create: (context) => CryptoRepository(),
           ),
         ],
         child: const MaterialApp(
-          home: CryptoScreen(),
+          // home: CryptoScreen(),
+          // home: ExchangesScreen(),
+          home: TabViewScreen(),
         ));
   }
 }
@@ -39,7 +42,7 @@ class NamesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          UserBloc(RepositoryProvider.of<UserRepository>(context))
+          UserBloc(RepositoryProvider.of<CryptoRepository>(context))
             ..add(LoadUserEvent()),
       child: Scaffold(
         appBar: AppBar(

@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_reso_coder/models/crypto_model.dart';
+import 'package:bloc_reso_coder/models/crypto_model/crypto_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../repos/crypto_repository.dart';

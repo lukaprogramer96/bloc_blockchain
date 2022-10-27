@@ -11,7 +11,7 @@ class TwitterLoadingState extends TwitterState {}
 
 class TwitterLoadedState extends TwitterState {
   const TwitterLoadedState(this.twitterList);
-  final TwitterModel? twitterList;
+  final List<TwitterModel>? twitterList;
 }
 
 class TwitterErrorState extends TwitterState {

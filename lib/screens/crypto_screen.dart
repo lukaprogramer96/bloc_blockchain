@@ -1,10 +1,10 @@
 import 'package:bloc_reso_coder/repos/crypto_repository.dart';
-import 'package:bloc_reso_coder/repos/options_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/app_states_bloc/crypto_bloc/crypto_bloc.dart';
-import '../models/crypto_model.dart';
+import '../blocs/crypto_bloc/crypto_bloc.dart';
+import '../models/crypto_model/crypto_model.dart';
+import 'options_screen.dart';
 
 class CryptoScreen extends StatelessWidget {
   const CryptoScreen({super.key});
@@ -17,13 +17,6 @@ class CryptoScreen extends StatelessWidget {
             ..add(LoadCryptoEvent()),
       child: Scaffold(
         backgroundColor: Colors.black54,
-        appBar: AppBar(
-          backgroundColor: Colors.black54,
-          title: const Text(
-            'The BLoC App',
-            style: TextStyle(color: Colors.white70),
-          ),
-        ),
         body: BlocBuilder<CryptoBloc, CryptoState>(builder: (context, state) {
           if (state is CryptoLoadingState) {
             return const Center(
@@ -55,17 +48,31 @@ class CryptoScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    title: Text(
-                      cryptoList[index].id.toString(),
-                      style: const TextStyle(color: Colors.white70),
+                    title: Row(
+                      children: [
+                        Text(
+                          '${cryptoList[index].rank}. '.toString(),
+                          style: const TextStyle(
+                              color: Colors.white70), //'${state.coin!.rank}.'
+                        ),
+                        Text(
+                          cryptoList[index].name.toString(),
+                          style: const TextStyle(color: Colors.white70),
+                        ),
+                        Text(
+                          '(${cryptoList[index].symbol})'.toString(),
+                          style: const TextStyle(color: Colors.white70),
+                        ),
+                      ],
                     ),
-                    subtitle: Text(
-                      cryptoList[index].name.toString(),
-                      style: const TextStyle(color: Colors.white70),
+                    trailing: Text(
+                      cryptoList[index].isactive != null &&
+                              cryptoList[index].isactive!
+                          ? 'active'
+                          : 'not active',
+                      style: const TextStyle(
+                          color: Colors.green, fontStyle: FontStyle.italic),
                     ),
-                    // trailing: CircleAvatar(
-                    //   backgroundImage: NetworkImage(cryptoList[index].symbol),
-                    // ),
                   ),
                 );
               },

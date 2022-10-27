@@ -15,5 +15,8 @@ class OptionsBloc extends Bloc<OptionsEvent, OptionsState> {
         emit(OptionsErrorState(e.toString()));
       }
     });
+    on<TwitterEvent>((event, emit) async {
+      emit(OptionsLoadedTwitterState());
+    });
   }
 }

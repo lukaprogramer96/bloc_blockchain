@@ -18,3 +18,5 @@ class OptionsErrorState extends OptionsState {
   @override
   List<Object> get props => [error];
 }
+
+class OptionsLoadedTwitterState extends OptionsState {}

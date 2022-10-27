@@ -6,6 +6,7 @@ part 'twitter_model.g.dart';
 @JsonSerializable()
 class TwitterModel {
   final DateTime? date;
+  @JsonKey(name: 'user_name')
   final String? username;
   final String? userimagelink;
   final String? status;

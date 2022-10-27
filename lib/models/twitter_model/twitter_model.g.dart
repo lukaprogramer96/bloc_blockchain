@@ -9,7 +9,7 @@ part of 'twitter_model.dart';
 TwitterModel _$TwitterModelFromJson(Map<String, dynamic> json) => TwitterModel(
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      username: json['username'] as String?,
+      username: json['user_name'] as String?,
       userimagelink: json['userimagelink'] as String?,
       status: json['status'] as String?,
       isretweet: json['isretweet'] as bool?,
@@ -22,7 +22,7 @@ TwitterModel _$TwitterModelFromJson(Map<String, dynamic> json) => TwitterModel(
 Map<String, dynamic> _$TwitterModelToJson(TwitterModel instance) =>
     <String, dynamic>{
       'date': instance.date?.toIso8601String(),
-      'username': instance.username,
+      'user_name': instance.username,
       'userimagelink': instance.userimagelink,
       'status': instance.status,
       'isretweet': instance.isretweet,
