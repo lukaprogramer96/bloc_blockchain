@@ -3,22 +3,21 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '../models/coin_model/coin_model.dart';
-import '../models/crypto_model/crypto_model.dart';
 import '../models/exchanges_model/exchanges_model.dart';
 import '../models/twitter_model/twitter_model.dart';
 import '../models/user_model/user_model.dart';
 
 class CryptoRepository {
-  String endpoint = 'https://api.coinpaprika.com/v1/coins';
-  Future<List<CryptoModel>> getCryptos() async {
-    Response response = await get(Uri.parse(endpoint));
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      final List result = jsonDecode(response.body);
-      return result.map(((e) => CryptoModel.fromJson(e))).toList();
-    } else {
-      throw Exception(response.reasonPhrase);
-    }
-  }
+  // String endpoint = 'https://api.coinpaprika.com/v1/coins';
+  // Future<List<CryptoModel>> getCryptos() async {
+  //   Response response = await get(Uri.parse(endpoint));
+  //   if (response.statusCode >= 200 && response.statusCode <= 299) {
+  //     final List result = jsonDecode(response.body);
+  //     return result.map(((e) => CryptoModel.fromJson(e))).toList();
+  //   } else {
+  //     throw Exception(response.reasonPhrase);
+  //   }
+  // }
 
   Future<CoinModel?> getCoin(id) async {
     String endpoint = 'https://api.coinpaprika.com/v1/coins/$id';

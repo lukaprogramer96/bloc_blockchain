@@ -4,19 +4,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../models/coin_model/coin_model.dart';
-import '../../../repos/crypto_repository.dart';
+import '../../data/repository/crypto_repository.dart';
 
 part 'coin_event.dart';
 part 'coin_state.dart';
 
 class CoinBloc extends Bloc<CoinEvent, CoinState> {
-  final CryptoRepository _coinRepository;
-
-  CoinBloc(this._coinRepository) : super(CoinLoadingState()) {
+  CoinBloc() : super(CoinLoadingState()) {
     on<GetCoinEvent>((event, emit) async {
       emit(CoinLoadingState());
       try {
-        final coin = await _coinRepository.getCoin(event.id);
+        final coin = await CryptoRepository.getCoin(event.id);
         emit(CoinLoadedState(coin));
       } catch (e) {
         emit(CoinErrorState(e.toString()));
@@ -24,3 +22,6 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     });
   }
 }
+
+//final cryptos = await CryptoRepository.getCryptos();
+  //      emit(CryptoLoadedState(cryptos ?? []));

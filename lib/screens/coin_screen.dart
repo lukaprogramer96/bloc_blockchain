@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:bloc_reso_coder/repos/crypto_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,11 +12,10 @@ class CoinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CoinBloc(RepositoryProvider.of<CryptoRepository>(context))
-            ..add(
-              GetCoinEvent(id: coinId),
-            ),
+      create: (context) => CoinBloc()
+        ..add(
+          GetCoinEvent(id: coinId),
+        ),
       child: BlocBuilder<CoinBloc, CoinState>(
         builder: (context, state) {
           if (state is CoinLoadingState) {
@@ -78,24 +76,88 @@ class CoinScreen extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Tags',
-                            style: TextStyle(
-                                color: Colors.white70,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20),
-                          )
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Tags',
+                                style: TextStyle(
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 25),
+                              ),
+                            ),
+                          ),
+                          // Row(
+                          //   children: state.coin!.tags != null
+                          //       ? state.coin!.tags!
+                          //           .map(
+                          //             (e) => Text(e.name),
+                          //           )
+                          //           .toList()
+                          //       : [],
+                          // ),
+                          GridView.count(
+                            mainAxisSpacing: 0,
+                            childAspectRatio: 1 / 0.51,
+                            crossAxisCount: 3,
+                            shrinkWrap: true,
+                            children: state.coin!.tags != null
+                                ? state.coin!.tags!
+                                    .map((e) => Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Column(
+                                            children: [
+                                              Card(
+                                                margin: const EdgeInsets.all(1),
+                                                color: Colors.black,
+                                                shape: RoundedRectangleBorder(
+                                                  side: const BorderSide(
+                                                      color: Colors.green),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Center(
+                                                    child: FittedBox(
+                                                      fit: BoxFit.contain,
+                                                      child: Text(
+                                                        e.name,
+                                                        style: const TextStyle(
+                                                            color: Colors.green,
+                                                            fontSize: 15),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ))
+                                    .toList()
+                                : [],
+                          ),
                         ],
                       )
                     ],
                   )
                 : const Center(
-                    child: Text('No coin'),
+                    child: Text(
+                      'No coin',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   );
           }
-          return Container();
+          return Container(
+            color: Colors.blue,
+            width: 100,
+          );
         },
       ),
     );

@@ -1,10 +1,9 @@
-import 'package:bloc_reso_coder/repos/crypto_repository.dart';
+import 'package:bloc_reso_coder/screens/tabview_options_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/crypto_bloc/crypto_bloc.dart';
 import '../models/crypto_model/crypto_model.dart';
-import 'options_screen.dart';
 
 class CryptoScreen extends StatelessWidget {
   const CryptoScreen({super.key});
@@ -12,9 +11,7 @@ class CryptoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CryptoBloc(RepositoryProvider.of<CryptoRepository>(context))
-            ..add(LoadCryptoEvent()),
+      create: (context) => CryptoBloc()..add(LoadCryptoEvent()),
       child: Scaffold(
         backgroundColor: Colors.black54,
         body: BlocBuilder<CryptoBloc, CryptoState>(builder: (context, state) {
@@ -42,9 +39,13 @@ class CryptoScreen extends StatelessWidget {
                         //     coinId: cryptoList[index].id,
                         //   ),
                         // ),
+                        // MaterialPageRoute(
+                        //   builder: (context) =>
+                        //       OptionsScreen(coinId: cryptoList[index].id),
+                        // ),
                         MaterialPageRoute(
-                          builder: (context) =>
-                              OptionsScreen(coinId: cryptoList[index].id),
+                          builder: (context) => TabViewOptionsScreen(
+                              coinId: cryptoList[index].id),
                         ),
                       );
                     },
